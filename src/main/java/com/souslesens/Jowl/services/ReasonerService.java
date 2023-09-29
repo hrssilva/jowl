@@ -6,8 +6,6 @@ import java.util.List;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.souslesens.Jowl.model.reasonerExtractTriples;
-import com.souslesens.Jowl.model.reasonerInference;
 
 
 public interface ReasonerService {
@@ -18,16 +16,15 @@ public interface ReasonerService {
     String getInferences(String filePath, String Url) throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
 	// POST API METHODS
 	
-	
 	String postUnsatisfaisableClassesContent(String ontologyContentDecoded64) throws Exception;
 	
-	String postInferencesContent(String ontologyContentDecoded64)
+	String postInferencesContent(String ontologyContentDecoded64, List<String> valuesList)
 			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
 	
 	String postConsistencyContent(String ontologyContentDecoded64)
 			throws OWLOntologyCreationException, JsonProcessingException, Exception;
-	
-	String postInferences(String filePath, String url)
+
+	String postInferences(String filePath, String url , List<String> valuesList)
 			throws OWLOntologyCreationException, OWLOntologyStorageException, IOException, Exception;
 	
 	String postConsistency(String filePath, String Url)

@@ -1,16 +1,18 @@
 package com.souslesens.Jowl.model;
 
-public class reasonerInference {
+public class ruleSWRLInput {
 	private String filePath;
 	private String url;
 	private String ontologyContentEncoded64;
-	private String[] predicates;
+	private String[] premise;
+	private String[] conclusion;
 	
-	public reasonerInference(String filePath , String url, String ontologyContentEncoded64 ,String[] predicates) {
+	public ruleSWRLInput(String filePath , String url, String ontologyContentEncoded64 ,String[] premise,String[] conclusion) {
 		this.filePath = filePath;
 		this.url = url;
 		this.ontologyContentEncoded64 = ontologyContentEncoded64;
-        this.predicates = predicates;
+        this.premise = premise;
+        this.conclusion = conclusion;
         }
 	public String getFilePath() {
 		return filePath;
@@ -24,7 +26,11 @@ public class reasonerInference {
 		return ontologyContentEncoded64;
 	}
 
-	public String[] getParams() {
-		return predicates;
+	public String[] getHead() {
+		return conclusion;
+	}
+	
+	public String[] getBody() {
+		return premise;
 	}
 }
