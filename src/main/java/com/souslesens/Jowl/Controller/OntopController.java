@@ -10,5 +10,8 @@ import com.souslesens.Jowl.model.ontopSparqlToSqlInput;
 @RestController
 @RequestMapping("/sparql2sql")
 public class OntopController {
+    //Check repos
+    //  create repo or  -   OntopService.ontopInitRepo(ontopSparqlToSqlInput input);
+    //  create sql request  -   OntopService.ontopSPARQL2SQL(String reqEncoded64, OntopRepository repo);
 
 }

@@ -10,7 +10,9 @@ import org.eclipse.rdf4j.query.QueryLanguage;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
+import java.util.HashMap;
 
 public class ontopSparqlToSql {
+    HashMap<String, OntopRepository> repos;
 
 }
