@@ -29,12 +29,14 @@ public class OntopController {
     @Autowired
         OntopService ontopService;
 
+    ontopSparqlToSql sparql2sqlModel;
+
     @PostMapping("/")
     public ResponseEntity<?> sparql2sql(@RequestBody ontopSparqlToSqlInput request) {
 
         String reqEncoded64 = request.getSparqlReqEncoded64();
         String repoURI = request.getOntologyURIEncoded64();
-        OntopRepository repo = ontopSparqlToSql.getRepo(repoURI);
+        OntopRepository repo = sparql2sqlModel.getRepo(repoURI);
 
         // Add parameter count check?
 
@@ -42,7 +44,7 @@ public class OntopController {
             //  create repo - OntopService.ontopInitRepo(ontopSparqlToSqlInput input);
             repo = ontopService.ontopInitRepo(request);
             // Add repo do hash
-            ontopSparqlToSql.addRepo(repoURI, repo);
+            sparql2sqlModel.addRepo(repoURI, repo);
         } 
 
         //  create sql request - OntopService.ontopSPARQL2SQL(String reqEncoded64, OntopRepository repo);
