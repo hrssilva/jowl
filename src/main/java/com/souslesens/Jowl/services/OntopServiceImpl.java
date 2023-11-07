@@ -50,7 +50,7 @@ public class OntopServiceImpl implements OntopService {
         }
     }
 
-    private String decodeBase64(String encodedString) {
+    public static String decodeBase64(String encodedString) {
         byte[] decodedBytes = Base64.getMimeDecoder().decode(encodedString);
         return new String(decodedBytes);
     }
