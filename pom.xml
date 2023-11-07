@@ -99,7 +99,7 @@
         <artifactId>ontop-system-sql-owlapi</artifactId>
 	<version>5.1.0</version>
 </dependency>
-<dependency>
+<!-- <dependency>
     <groupId>org.eclipse.rdf4j</groupId>
     <artifactId>rdf4j-model</artifactId>
     <version>5.0.0-M2</version>
@@ -108,17 +108,17 @@
     <groupId>org.eclipse.rdf4j</groupId>
     <artifactId>rdf4j-query</artifactId>
     <version>5.0.0-M2</version>
-</dependency>
+</dependency>-->
 <dependency>
     <groupId>org.eclipse.rdf4j</groupId>
     <artifactId>rdf4j-rio-api</artifactId>
     <version>5.0.0-M2</version>
 </dependency>
-<dependency>
+<!--<dependency>
     <groupId>org.eclipse.rdf4j</groupId>
     <artifactId>rdf4j-util</artifactId>
     <version>3.7.7</version>
-</dependency>
+</dependency>-->
 	</dependencies>
 	<build>
 		<plugins>
