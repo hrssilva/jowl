@@ -35,7 +35,14 @@ public class OntopController {
     public ResponseEntity<?> sparql2sql(@RequestBody ontopSparqlToSqlInput request) {
 
         String reqEncoded64 = request.getSparqlReqEncoded64();
-        String repoURI = request.getOntologyURIEncoded64();
+        String repoURI = OntopService.decodeBase64(request.getOntologyURIEncoded64());
+
+        // Check for HealthCheck request
+        if (repoURI == "http://check.com/healthcheck") {
+            String res = ontopService.healthCheck(sparql2sqlModel.getRepos());
+            return ResponseEntity.ok(res);
+        }
+
         OntopRepository repo = sparql2sqlModel.getRepo(repoURI);
 
         // Add parameter count check?
