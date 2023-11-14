@@ -4,6 +4,7 @@ import com.souslesens.Jowl.model.ontopSparqlToSqlInput;
 import org.apache.commons.lang3.ObjectUtils.Null;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
+import org.eclipse.rdf4j.repository.RepositoryException;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import it.unibz.inf.ontop.injection.OntopSQLOWLAPIConfiguration;
 import it.unibz.inf.ontop.rdf4j.repository.OntopRepository;
@@ -11,6 +12,9 @@ import it.unibz.inf.ontop.rdf4j.repository.OntopRepositoryConnection;
 import org.springframework.stereotype.Service;
 import java.io.StringReader;
 import java.util.Base64;
+
+import java.util.HashMap;
+
 
 @Service
 public class OntopServiceImpl implements OntopService {
@@ -40,6 +44,10 @@ public class OntopServiceImpl implements OntopService {
                 connection.begin();
                 connection.add(new StringReader(ontologyContent), "", RDFFormat.TURTLE);
                 connection.commit();
+                connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
             }
 
             return ontopRepo;
@@ -54,4 +62,23 @@ public class OntopServiceImpl implements OntopService {
         byte[] decodedBytes = Base64.getMimeDecoder().decode(encodedString);
         return new String(decodedBytes);
     }
+
+    public boolean healthCheck(HashMap<String, OntopRepository> repos) {
+        boolean allHealthy = true;
+
+        for (HashMap.Entry<String, OntopRepository> entry : repos.entrySet()) {
+            String repoName = entry.getKey();
+            OntopRepository repo = entry.getValue();
+
+            try (OntopRepositoryConnection connection = repo.getConnection()) {
+                System.out.println("Repo " + repoName + "' ok ");
+            } catch (Exception e) {
+                allHealthy = false;
+                System.err.println("Error connecting to '" + repoName + "': " + e.getMessage());
+            }
+        }
+
+        return allHealthy;
+    }
+
 }
