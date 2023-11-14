@@ -54,3 +54,6 @@ Thumbs.db
 *.ttl
 *.owl
 config/settings.xml
+
+# for node
+**node_modules**
