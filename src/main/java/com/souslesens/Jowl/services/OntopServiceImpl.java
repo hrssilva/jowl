@@ -27,9 +27,9 @@ public class OntopServiceImpl implements OntopService {
 
     @Override
     public OntopRepository ontopInitRepo(ontopSparqlToSqlInput input) {
-        String ontologyURI = decodeBase64(input.getOntologyURIEncoded64());
-        String ontologyContent = decodeBase64(input.getOntologyContentEncoded64());
-        String mappings = decodeBase64(input.getMappingsEncoded64());
+        String ontologyURI = OntopService.decodeBase64(input.getOntologyURIEncoded64());
+        String ontologyContent = OntopService.decodeBase64(input.getOntologyContentEncoded64());
+        String mappings = OntopService.decodeBase64(input.getMappingsEncoded64());
 
         try {
             OntopSQLOWLAPIConfiguration config = OntopSQLOWLAPIConfiguration.defaultBuilder()
@@ -58,10 +58,6 @@ public class OntopServiceImpl implements OntopService {
         }
     }
 
-    public static String decodeBase64(String encodedString) {
-        byte[] decodedBytes = Base64.getMimeDecoder().decode(encodedString);
-        return new String(decodedBytes);
-    }
 
     public boolean healthCheck(HashMap<String, OntopRepository> repos) {
         boolean allHealthy = true;

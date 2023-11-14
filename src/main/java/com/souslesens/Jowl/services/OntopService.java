@@ -6,6 +6,7 @@ import org.eclipse.rdf4j.repository.RepositoryConnection;
 import it.unibz.inf.ontop.rdf4j.repository.OntopRepository;
 import it.unibz.inf.ontop.rdf4j.repository.OntopRepositoryConnection;
 
+import java.util.Base64;
 import java.util.HashMap;
 
 
@@ -15,4 +16,9 @@ public interface OntopService {
     OntopRepository ontopInitRepo(ontopSparqlToSqlInput input);
 
     boolean healthCheck(HashMap<String, OntopRepository> repos);
+    
+    public static String decodeBase64(String encodedString) {
+        byte[] decodedBytes = Base64.getMimeDecoder().decode(encodedString);
+        return new String(decodedBytes);
+    }
 }
