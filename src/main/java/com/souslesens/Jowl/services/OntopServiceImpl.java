@@ -31,20 +31,17 @@ public class OntopServiceImpl implements OntopService {
             try(TupleQueryResult tupleSql = connection.prepareTupleQuery(QueryLanguage.SPARQL, req).evaluate()){
                 while(tupleSql.hasNext()){
                     BindingSet bindingSet = tupleSql.next();
-
                     for(String bindingName : tupleSql.getBindingNames()){
                         System.out.println(bindingName + " = " + bindingSet.getValue(bindingName));
                     }
                 }
             }
-
             connection.commit();
             return "";
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-        return "";
     }
 
     @Override
