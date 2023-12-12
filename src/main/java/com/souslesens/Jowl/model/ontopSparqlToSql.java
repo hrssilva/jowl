@@ -15,6 +15,10 @@ import java.util.HashMap;
 public class ontopSparqlToSql {
     HashMap<String, OntopRepository> repos;
 
+    public ontopSparqlToSql() {
+      this.repos = new HashMap<>();
+  }
+
     /* Returns the repository storage object (java.util.HashMap) */
     public HashMap<String, OntopRepository> getRepos() {
         return repos;

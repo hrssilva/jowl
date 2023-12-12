@@ -59,10 +59,10 @@ public class OntopServiceImpl implements OntopService {
 
             // verify later
             try (OntopRepositoryConnection connection = ontopRepo.getConnection()) {
-                connection.begin();
-                connection.add(new StringReader(ontologyContent), "", RDFFormat.TURTLE);
-                connection.commit();
-                connection.close();
+              //  connection.begin();
+              //  connection.add(new StringReader(ontologyContent), "", RDFFormat.TURTLE);
+              //  connection.commit();
+              //  connection.close();
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
