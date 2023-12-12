@@ -19,6 +19,7 @@ import com.souslesens.Jowl.model.ontopSparqlToSql;
 import com.souslesens.Jowl.model.ontopSparqlToSqlInput;
 
 import it.unibz.inf.ontop.rdf4j.repository.OntopRepository;
+import jakarta.annotation.PostConstruct;
 
 @RestController
 @RequestMapping("/sparql2sql")
@@ -28,6 +29,11 @@ public class OntopController {
   OntopService ontopService;
 
   ontopSparqlToSql sparql2sqlModel;
+  
+  @PostConstruct
+  public void initModel() {
+    this.sparql2sqlModel = new ontopSparqlToSql();
+  }
 
   @PostMapping("/")
   public ResponseEntity<?> sparql2sql(@RequestBody ontopSparqlToSqlInput request) {
