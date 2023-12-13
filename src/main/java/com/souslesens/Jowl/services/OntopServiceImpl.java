@@ -51,11 +51,12 @@ public class OntopServiceImpl implements OntopService {
 
         try {
             OntopSQLOWLAPIConfiguration config = OntopSQLOWLAPIConfiguration.defaultBuilder()
-                    .ontologyFile(ontologyContent)
-                    .nativeOntopMappingFile(mappings)
+                    .ontologyReader(new StringReader(ontologyContent))
+                    .nativeOntopMappingReader(new StringReader(mappings))
                     .build();
 
             OntopRepository ontopRepo = OntopRepository.defaultRepository(config);
+            ontopRepo.getConnection().
 
             // verify later
             try (OntopRepositoryConnection connection = ontopRepo.getConnection()) {
