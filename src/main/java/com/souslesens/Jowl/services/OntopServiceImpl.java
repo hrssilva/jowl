@@ -48,15 +48,18 @@ public class OntopServiceImpl implements OntopService {
     public OntopRepository ontopInitRepo(ontopSparqlToSqlInput input) {
         String ontologyContent = OntopService.decodeBase64(input.getOntologyContentEncoded64());
         String mappings = OntopService.decodeBase64(input.getMappingsEncoded64());
-
         try {
             OntopSQLOWLAPIConfiguration config = OntopSQLOWLAPIConfiguration.defaultBuilder()
                     .ontologyReader(new StringReader(ontologyContent))
                     .nativeOntopMappingReader(new StringReader(mappings))
+                    // jdbc.url = jdbc:h2:tcp://localhost/./books.h2
+                    // jdbc.user = sa
+                    // jdbc.password = test
+                    // jdbc.driver = org.h2.Driver
+                    // .properties(variaveis_de_ambiente_JDBC)                    
                     .build();
 
             OntopRepository ontopRepo = OntopRepository.defaultRepository(config);
-            ontopRepo.getConnection().
 
             // verify later
             try (OntopRepositoryConnection connection = ontopRepo.getConnection()) {
