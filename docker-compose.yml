@@ -10,4 +10,9 @@ services:
     restart: always
     ports:
       - "9170:9170"
+    environment:
+      - JDBC_URL= ${JDBC_URL}
+      - JDBC_USER= ${JDBC_USER}
+      - JDBC_PASSWORD= ${JDBC_PASSWORD}
+      - JDBC_DRIVER= ${JDBC_DRIVER}
 

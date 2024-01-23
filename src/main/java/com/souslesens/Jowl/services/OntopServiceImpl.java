@@ -21,7 +21,8 @@ import java.util.HashMap;
 
 @Service
 public class OntopServiceImpl implements OntopService {
-    
+    private static final String propertiesFile = "src/main/resources/application.properties";
+
     @Override
     public String ontopSPARQL2SQL(String reqEncoded64, OntopRepository repo) {
         String req = OntopService.decodeBase64(reqEncoded64);
@@ -52,11 +53,7 @@ public class OntopServiceImpl implements OntopService {
             OntopSQLOWLAPIConfiguration config = OntopSQLOWLAPIConfiguration.defaultBuilder()
                     .ontologyReader(new StringReader(ontologyContent))
                     .nativeOntopMappingReader(new StringReader(mappings))
-                    // jdbc.url = jdbc:h2:tcp://localhost/./books.h2
-                    // jdbc.user = sa
-                    // jdbc.password = test
-                    // jdbc.driver = org.h2.Driver
-                    // .properties(variaveis_de_ambiente_JDBC)                    
+                    .propertyFile(propertiesFile)                    
                     .build();
 
             OntopRepository ontopRepo = OntopRepository.defaultRepository(config);
@@ -80,7 +77,7 @@ public class OntopServiceImpl implements OntopService {
         }
     }
 
-
+    @Override
     public boolean healthCheck(HashMap<String, OntopRepository> repos) {
         boolean allHealthy = true;
 
