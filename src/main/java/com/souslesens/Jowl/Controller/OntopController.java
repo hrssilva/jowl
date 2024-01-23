@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import com.souslesens.Jowl.services.OntopService;
 import com.souslesens.Jowl.model.ontopSparqlToSql;
 import com.souslesens.Jowl.model.ontopSparqlToSqlInput;
+import com.souslesens.Jowl.model.ontopRepoDataInput;
 
 import it.unibz.inf.ontop.rdf4j.repository.OntopRepository;
 import jakarta.annotation.PostConstruct;
@@ -42,7 +43,7 @@ public class OntopController {
     String repoURI = OntopService.decodeBase64(request.getOntologyURIEncoded64());
 
     // Check for HealthCheck request
-    if (repoURI == "http://check.com/healthcheck") {
+    if ("http://check.com/healthcheck".equals(repoURI)) {
       if (ontopService.healthCheck(sparql2sqlModel.getRepos())) {
         return ResponseEntity.ok("OK");
 
@@ -53,22 +54,37 @@ public class OntopController {
 
     // Add parameter count check?
 
+    // check if the repo not exists
     if (repo == null) {
-      // create repo - OntopService.ontopInitRepo(ontopSparqlToSqlInput input);
-      repo = ontopService.ontopInitRepo(request);
-      // Add repo do hash
-      sparql2sqlModel.addRepo(repoURI, repo);
+        return new ResponseEntity<>("Repository not exists", HttpStatus.CONFLICT);
     }
 
-    // create sql request - OntopService.ontopSPARQL2SQL(String reqEncoded64,
-    // OntopRepository repo);
+    // create sql request - OntopService.ontopSPARQL2SQL(String reqEncoded64, OntopRepository repo);
     String response = ontopService.ontopSPARQL2SQL(reqEncoded64, repo);
-
+    
     return ResponseEntity.ok(response);
 
   }
   @PostMapping("/b")
-  public ResponseEntity<?> createRepo(@RequestBody ontopRepoData request) {}
+  public ResponseEntity<?> createRepo(@RequestBody ontopRepoDataInput request) {
+
+    // decode the parameters from the request 
+    String ontologyURI = OntopService.decodeBase64(request.getOntologyURIEncoded64());
+    
+    // check if the repo already exists
+    OntopRepository existingRepo = sparql2sqlModel.getRepo(ontologyURI);
+    if (existingRepo != null) {
+        return new ResponseEntity<>("Repository already exists", HttpStatus.CONFLICT);
+    }
+
+    // create repo
+    OntopRepository newRepo = ontopService.ontopInitRepo(request);
+
+    // Add repo do hash
+    sparql2sqlModel.addRepo(ontologyURI, newRepo);
+
+    return new ResponseEntity<>("Ok!", HttpStatus.OK);
+  }
 
 
   private int countParams(Object... parameters) {

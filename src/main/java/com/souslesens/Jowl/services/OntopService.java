@@ -1,5 +1,7 @@
 package com.souslesens.Jowl.services;
 import com.souslesens.Jowl.model.ontopSparqlToSqlInput;
+import com.souslesens.Jowl.model.ontopRepoDataInput;
+
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 
@@ -13,7 +15,7 @@ import java.util.HashMap;
 public interface OntopService {
     String ontopSPARQL2SQL(String reqEncoded64, OntopRepository repo);
     
-    OntopRepository ontopInitRepo(ontopSparqlToSqlInput input);
+    OntopRepository ontopInitRepo(ontopRepoDataInput input);
 
     boolean healthCheck(HashMap<String, OntopRepository> repos);
     

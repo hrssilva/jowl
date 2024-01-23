@@ -1,5 +1,6 @@
 package com.souslesens.Jowl.services;
 import com.souslesens.Jowl.model.ontopSparqlToSqlInput;
+import com.souslesens.Jowl.model.ontopRepoDataInput;
 
 import org.apache.commons.lang3.ObjectUtils.Null;
 import org.eclipse.rdf4j.repository.Repository;
@@ -46,9 +47,10 @@ public class OntopServiceImpl implements OntopService {
     }
 
     @Override
-    public OntopRepository ontopInitRepo(ontopSparqlToSqlInput input) {
+    public OntopRepository ontopInitRepo(ontopRepoDataInput input) {
         String ontologyContent = OntopService.decodeBase64(input.getOntologyContentEncoded64());
         String mappings = OntopService.decodeBase64(input.getMappingsEncoded64());
+
         try {
             OntopSQLOWLAPIConfiguration config = OntopSQLOWLAPIConfiguration.defaultBuilder()
                     .ontologyReader(new StringReader(ontologyContent))
