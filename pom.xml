@@ -112,6 +112,11 @@
 	<artifactId>guava</artifactId>
 	<version>21.0</version>
 </dependency>
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <version>2.1.214</version>
+</dependency>
 <!--<dependency>
     <groupId>org.eclipse.rdf4j</groupId>
     <artifactId>rdf4j-util</artifactId>
