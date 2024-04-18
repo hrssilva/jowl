@@ -13,12 +13,17 @@ import it.unibz.inf.ontop.rdf4j.repository.OntopRepositoryConnection;
 import org.springframework.stereotype.Service;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.query.BindingSet;
+import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.query.QueryLanguage;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import java.io.StringReader;
 import java.util.Base64;
 
 import java.util.HashMap;
+import org.json.JSONObject;
+import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OntopServiceImpl implements OntopService {
@@ -30,21 +35,53 @@ public class OntopServiceImpl implements OntopService {
 
     try {
       OntopRepositoryConnection connection = repo.getConnection();
-      TupleQueryResult tupleData = connection.prepareTupleQuery(QueryLanguage.SPARQL, req).evaluate();
-      // connection.begin();
-      while (tupleData.hasNext()) {
-        BindingSet bindingSet = tupleData.next();
-        for (String bindingName : tupleData.getBindingNames()) {
-          System.out.println(bindingName + " = " + bindingSet.getValue(bindingName));
-        }
-      }
-      // connection.commit();
+      // TupleQueryResult tupleData = connection.prepareTupleQuery(QueryLanguage.SPARQL, req).evaluate();
+      // // connection.begin();
+      // while (tupleData.hasNext()) {
+      //   BindingSet bindingSet = tupleData.next();
+      //   for (String bindingName : tupleData.getBindingNames()) {
+      //     System.out.println(bindingName + " = " + bindingSet.getValue(bindingName));
+      //   }
+      // }
+      // // connection.commit();
       return connection.reformulateIntoNativeQuery(req);
     } catch (Exception e) {
       e.printStackTrace();
       return null;
     }
   }
+
+  @Override
+  public String ontopSPARQL2SQL2(String reqEncoded64, OntopRepository repo) {
+    String req = OntopService.decodeBase64(reqEncoded64);
+
+    try {
+      OntopRepositoryConnection connection = repo.getConnection();
+      TupleQueryResult tupleData = connection.prepareTupleQuery(QueryLanguage.SPARQL, req).evaluate();
+      // // connection.begin();
+      List<JSONObject> targetList = new ArrayList<>();
+      while (tupleData.hasNext()) {
+        JSONObject selectObject = new JSONObject();
+        BindingSet bindingSet = tupleData.next();
+        for (String bindingName : tupleData.getBindingNames()) {
+          //System.out.println(bindingName + " = " + bindingSet.getValue(bindingName));
+          selectObject.put(bindingName, bindingSet.getValue(bindingName).stringValue());
+        }
+        targetList.add(selectObject);
+      }
+      // // connection.commit();
+
+      JSONObject jsonObject = new JSONObject();
+      jsonObject.put("bindings", tupleData.getBindingNames());
+      jsonObject.put("result", targetList);
+      String jsonString = jsonObject.toString();
+      return jsonString;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
 
   @Override
   public OntopRepository ontopInitRepo(ontopRepoDataInput input) {
@@ -54,7 +91,7 @@ public class OntopServiceImpl implements OntopService {
     try {
       OntopSQLOWLAPIConfiguration config = OntopSQLOWLAPIConfiguration.defaultBuilder()
           .ontologyReader(new StringReader(ontologyContent))
-          .nativeOntopMappingReader(new StringReader(mappings))
+          .r2rmlMappingReader(new StringReader(mappings))
           .propertyFile(propertiesFile)
           .build();
 

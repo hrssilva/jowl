@@ -14,11 +14,12 @@ import java.util.HashMap;
 
 public interface OntopService {
     String ontopSPARQL2SQL(String reqEncoded64, OntopRepository repo);
-    
+    String ontopSPARQL2SQL2(String reqEncoded64, OntopRepository repo);
+
     OntopRepository ontopInitRepo(ontopRepoDataInput input);
 
     boolean healthCheck(HashMap<String, OntopRepository> repos);
-    
+
     public static String decodeBase64(String encodedString) {
         byte[] decodedBytes = Base64.getMimeDecoder().decode(encodedString);
         return new String(decodedBytes);

@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.totalenergies.fr/data/prenoms-metiers-competencies/"
+     xml:base="http://www.totalenergies.fr/data/prenoms-metiers-competencies/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:pav="http://purl.org/pav/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:rdl="http://rds.posccaesar.org/ontology/lis14/rdl/"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:AnnotationVocabulary="https://spec.industrialontologies.org/ontology/core/meta/AnnotationVocabulary/">
+    <owl:Ontology rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies">
+        <owl:imports rdf:resource="http://rds.posccaesar.org/ontology/lis14/ont/core/2.0"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#CapabilityDatum -->
+
+    <owl:Class rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#CapabilityDatum">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#GainOfRole -->
+
+    <owl:Class rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#GainOfRole">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Activity"/>
+        <owl:disjointWith rdf:resource="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#LossOfRole"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#LanguageSkill -->
+
+    <owl:Class rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#LanguageSkill">
+        <rdfs:subClassOf rdf:resource="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#Skill"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#LossOfRole -->
+
+    <owl:Class rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#LossOfRole">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Activity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#Prenom -->
+
+    <owl:Class rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#Prenom">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/InformationObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#Skill -->
+
+    <owl:Class rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#Skill">
+        <rdfs:subClassOf rdf:resource="http://rds.posccaesar.org/ontology/lis14/rdl/Capability"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#TechnicalSkill -->
+
+    <owl:Class rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#TechnicalSkill">
+        <rdfs:subClassOf rdf:resource="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#Skill"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#0-notions -->
+
+    <owl:Class rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#0-notions">
+        <rdfs:subClassOf rdf:resource="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#CapabilityDatum"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#1-base -->
+
+    <owl:Class rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#1-base">
+        <rdfs:subClassOf rdf:resource="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#CapabilityDatum"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#2-pratical -->
+
+    <owl:Class rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#2-pratical">
+        <rdfs:subClassOf rdf:resource="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#CapabilityDatum"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#3-mastery -->
+
+    <owl:Class rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#3-mastery">
+        <rdfs:subClassOf rdf:resource="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#CapabilityDatum"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#4-reference -->
+
+    <owl:Class rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#4-reference">
+        <rdfs:subClassOf rdf:resource="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#CapabilityDatum"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#0-notions"/>
+            <rdf:Description rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#1-base"/>
+            <rdf:Description rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#2-pratical"/>
+            <rdf:Description rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#3-mastery"/>
+            <rdf:Description rdf:about="http://www.totalenergies.fr/data/prenoms-metiers-competencies/tbox#4-reference"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi -->
+

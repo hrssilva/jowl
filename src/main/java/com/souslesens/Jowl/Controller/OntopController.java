@@ -30,7 +30,7 @@ public class OntopController {
   OntopService ontopService;
 
   ontopSparqlToSql sparql2sqlModel;
-  
+
   @PostConstruct
   public void initModel() {
     this.sparql2sqlModel = new ontopSparqlToSql();
@@ -61,16 +61,16 @@ public class OntopController {
 
     // create sql request - OntopService.ontopSPARQL2SQL(String reqEncoded64, OntopRepository repo);
     String response = ontopService.ontopSPARQL2SQL(reqEncoded64, repo);
-    
+
     return ResponseEntity.ok(response);
 
   }
   @PostMapping("/b")
   public ResponseEntity<?> createRepo(@RequestBody ontopRepoDataInput request) {
 
-    // decode the parameters from the request 
+    // decode the parameters from the request
     String ontologyURI = OntopService.decodeBase64(request.getOntologyURIEncoded64());
-    
+
     // check if the repo already exists
     OntopRepository existingRepo = sparql2sqlModel.getRepo(ontologyURI);
     if (existingRepo != null) {
@@ -95,6 +95,36 @@ public class OntopController {
       }
     }
     return count;
+  }
+
+  @PostMapping("/c")
+  public ResponseEntity<?> sparql2sql2(@RequestBody ontopSparqlToSqlInput request) {
+
+    String reqEncoded64 = request.getSparqlReqEncoded64();
+    String repoURI = OntopService.decodeBase64(request.getOntologyURIEncoded64());
+
+    // Check for HealthCheck request
+    if ("http://check.com/healthcheck".equals(repoURI)) {
+      if (ontopService.healthCheck(sparql2sqlModel.getRepos())) {
+        return ResponseEntity.ok("OK");
+
+      }
+    }
+
+    OntopRepository repo = sparql2sqlModel.getRepo(repoURI);
+
+    // Add parameter count check?
+
+    // check if the repo not exists
+    if (repo == null) {
+        return new ResponseEntity<>("Repository not exists", HttpStatus.CONFLICT);
+    }
+
+    // create sql request - OntopService.ontopSPARQL2SQL(String reqEncoded64, OntopRepository repo);
+    String response = ontopService.ontopSPARQL2SQL2(reqEncoded64, repo);
+
+    return ResponseEntity.ok(response);
+
   }
 
 }
