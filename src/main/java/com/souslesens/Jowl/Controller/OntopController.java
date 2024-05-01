@@ -36,7 +36,7 @@ public class OntopController {
     this.sparql2sqlModel = new ontopSparqlToSql();
   }
 
-  @PostMapping("/a")
+  @PostMapping("/convert")
   public ResponseEntity<?> sparql2sql(@RequestBody ontopSparqlToSqlInput request) {
 
     String reqEncoded64 = request.getSparqlReqEncoded64();
@@ -65,7 +65,7 @@ public class OntopController {
     return ResponseEntity.ok(response);
 
   }
-  @PostMapping("/b")
+  @PostMapping("/createrepo")
   public ResponseEntity<?> createRepo(@RequestBody ontopRepoDataInput request) {
 
     // decode the parameters from the request
@@ -86,18 +86,7 @@ public class OntopController {
     return new ResponseEntity<>("Ok!", HttpStatus.OK);
   }
 
-
-  private int countParams(Object... parameters) {
-    int count = 0;
-    for (Object param : parameters) {
-      if (param != null && !param.toString().isEmpty()) {
-        count++;
-      }
-    }
-    return count;
-  }
-
-  @PostMapping("/c")
+  @PostMapping("/query")
   public ResponseEntity<?> sparql2sql2(@RequestBody ontopSparqlToSqlInput request) {
 
     String reqEncoded64 = request.getSparqlReqEncoded64();
@@ -125,6 +114,16 @@ public class OntopController {
 
     return ResponseEntity.ok(response);
 
+  }
+
+  private int countParams(Object... parameters) {
+    int count = 0;
+    for (Object param : parameters) {
+      if (param != null && !param.toString().isEmpty()) {
+        count++;
+      }
+    }
+    return count;
   }
 
 }
